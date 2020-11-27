@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LTM</title>
+</head>
+<body>
+  <div style="width: 100%;">
+    <h1> CLient </h1>
+    public class Client { <br/>
+      private DatagramSocket socket;<br/>
+      private DatagramPacket packet;<br/>
+      private int port;<br/>
+      public Client(int port ) throws SocketException { <br/>
+        this.port = port;<br/>
+        socket = new DatagramSocket(this.port); <br/>
+      }<br/>
+      
+      public void send(byte[] data, int port) throws IOException { <br/>
+        InetAddress ip=InetAddress.getByName("127.0.0.1");<br/>
+        packet=new DatagramPacket(data, data.length, ip, port); <br/>
+        socket.send(packet);<br/>
+      }<br/>
+      
+      public byte[] receive() throws IOException {<br/>
+        byte[] res=new byte[1024];<br/>
+        packet=new DatagramPacket(res, res.length);<br/>
+        socket.receive(packet);<br/>
+        return packet.getData();<br/>
+      }<br/>
+    }<br/>
+
+    
+  </div>
+</body>
+</html>
