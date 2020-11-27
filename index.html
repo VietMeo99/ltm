@@ -6,7 +6,7 @@
   <title>LTM</title>
 </head>
 <body>
-  <div style="width: 100%;">
+  <div style="width: 60%; margin: 20px auto;">
     <h1> CLient </h1>
     public class Client { <br/>
       private DatagramSocket socket;<br/>
@@ -31,7 +31,47 @@
       }<br/>
     }<br/>
 
+    <hr>
+    <h1>Run</h1>
+    public class Run { <br/>
+      public static void main(String[] args) throws IOException { <br/>
+        Client client=new Client(1502); <br/>
+        SinhVien sv=new SinhVien("1", "name", 1, 3, 4); <br/>
+        client.send(Utils.toBytes(sv), 1501); <br/>
+        String status=new String(client.receive()); <br/>
+        System.out.println(status); <br/>
+      } <br/>
+    } <br/>
+    <hr>
     
+    <h1>Utils</h1>
+    
+    public class Utils { <br/>
+      public static byte[] toBytes(Object obj) throws IOException {<br/>
+        ByteArrayOutputStream bos=new ByteArrayOutputStream();<br/>
+        ObjectOutputStream out=new ObjectOutputStream(bos);<br/>
+        out.writeObject(obj);<br/>
+        return bos.toByteArray();<br/>
+      }<br/>
+      public static Object toObject(byte[] data) throws IOException, ClassNotFoundException {<br/>
+        ByteArrayInputStream bos=new ByteArrayInputStream(data);<br/>
+        ObjectInputStream out=new ObjectInputStream(bos);<br/>
+        return out.readObject();<br/>
+      }<br/>
+      public static boolean pass(SinhVien sv) {<br/>
+        float tb=(sv.getAnh()+sv.getTin()+sv.getToan())/3;<br/>
+        if(tb>5) return true;<br/>
+        return false;<br/>
+      }<br/>
+      public static void writeFile(String path, SinhVien sv, String pass) throws IOException {<br/>
+        FileWriter file=new FileWriter(path, true);<br/>
+        file.write(sv.getId()+";"+sv.getName()+";"+pass+"\n");<br/>
+        file.close();<br/>
+      }<br/>
+    }<br/>
+    <hr>
+    <h1>SinhVien</h1>
+    public class SinhVien implements Serializable <br/>
   </div>
 </body>
 </html>
