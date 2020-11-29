@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="https://cdn.chozoi.vn/static/2cad0b17a6e74bec9ede326918f63042.png" type="image/x-icon"/>
   <title>LTM</title>
 </head>
 <body>
@@ -72,6 +73,56 @@
     <hr>
     <h1>SinhVien</h1>
     public class SinhVien implements Serializable <br/>
+
+    <hr>
+    <h1>word to number</h1>
+    public static void main(String[] args) { <br/>
+      String arr = "";<br/>
+      try (Scanner scanner = new Scanner(System.in)) {<br/>
+        while (true) {<br/>
+          System.out.print("Nhập vào chuỗi số của bạn: ");<br/>
+          arr = scanner.nextLine().trim();<br/>
+          HashMap<String, String> numMain = new HashMap<String, String>();<br/>
+          numMain.put("chin", "9");<br/>
+          numMain.put("tam", "8");<br/>
+          numMain.put("bay", "7");<br/>
+          numMain.put("sau", "6");<br/>
+          numMain.put("nam", "5");<br/>
+          numMain.put("bon", "4");<br/>
+          numMain.put("ba", "3");<br/>
+          numMain.put("hai", "2");<br/>
+          numMain.put("mot", "1");<br/>
+          numMain.put("khong", "0");<br/>
+          String rs = "";<br/>
+          while (arr.length() > 0) { <br/>
+            int count = 0;<br/>
+            for (String str : numMain.keySet()) { <br/>
+              count ++;<br/>
+              int a;<br/>
+              a = arr.length() - str.length();<br/>
+              if( a < 0) a = 0;<br/>
+              if (arr.substring(a, arr.length()).equals(str)) { <br/>
+                rs += numMain.get(str);<br/>
+                arr = arr.substring(0, arr.length() - str.length()); <br/>
+                break;<br/>
+              }<br/>
+            }<br/>
+            if(count == 10 ) break;<br/>
+          }<br/>
+          if (arr.length() > 0) { <br/>
+            System.out.print("chuỗi trên không tìm được số ");<br/>
+          }else {<br/>
+            System.out.print("số cần có " + rs.length() + " chữ số là : "); <br/>
+            for (int i = rs.length() - 1; i >= 0; i--) {<br/>
+              System.out.print(rs.charAt(i));<br/>
+            }<br/>
+          }<br/>
+          System.out.println(""); <br/>
+        }<br/>
+      }<br/>
+    }<br/>
+  }<br/>
+  
   </div>
 </body>
 </html>
