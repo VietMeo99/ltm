@@ -33,6 +33,20 @@
     }<br/>
 
     <hr>
+    <h1>Server run -  send string</h1>
+    Server server=new Server(1501); <br/>
+		while(true) {<br/>
+			SinhVien sv=(SinhVien) Utils.toObject(server.receive()); <br/>
+			boolean check=Utils.pass(sv);<br/>
+			if(check) {<br/>
+				server.send("Qua mon".getBytes(), 1502); <br/>
+				Utils.writeFile("data.txt", sv, "Qua");<br/>
+			}else {<br/>
+				server.send("Truot".getBytes(), 1502); <br/>
+				Utils.writeFile("data.txt", sv, "Truot"); <br/>
+			}<br/>
+		}<br/>
+    <hr>
     <h1>Run</h1>
     public class Run { <br/>
       public static void main(String[] args) throws IOException { <br/>
